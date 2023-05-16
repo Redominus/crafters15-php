@@ -6,9 +6,8 @@ RUN docker-php-ext-enable xdebug
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
-ARG UNAME=dev-user
 ARG UID
 ARG GID
-RUN addgroup -g $GID -S $UNAME && adduser -u $UID -S $UNAME -s /bin/sh -G $UNAME
-USER $UNAME
+
+USER $UID:$GID
 WORKDIR /code
